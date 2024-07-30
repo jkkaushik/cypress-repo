@@ -11,11 +11,19 @@ jobs:
           cache-path: ~/project/node_modules
           override-ci-command: npm install --legacy-peer-deps
       - run:
+          name: Install Xvfb
+          command: sudo apt-get update && sudo apt-get install -y xvfb
+      - run:
           name: Install Cypress
           command: npm install cypress --save-dev
       - run:
           name: Run Cypress Tests
-          command: npm run test
+          # command: npm run test
+          command: |
+            # Start Xvfb in the background
+            Xvfb :99 -ac &
+            # Set the display to :99 and run Cypress
+            DISPLAY=:99 npx cypress run
       - run:
           name: Notify Google Chat on Success
           command: |
