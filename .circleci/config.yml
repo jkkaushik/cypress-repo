@@ -39,7 +39,6 @@ jobs:
 
 workflows:
   build-and-test:
-    version: 2
     jobs:
       - run-cypress-tests:
           filters:
