@@ -15,7 +15,7 @@ jobs:
           command: npm install cypress --save-dev
       - run:
           name: Run Cypress Tests
-          command: npm run cypress:run
+          command: npm run test
       - run:
           name: Notify Google Chat on Success
           command: |
