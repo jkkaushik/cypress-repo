@@ -39,12 +39,17 @@ jobs:
 
 workflows:
   build-and-test:
+    version: 2
     jobs:
       - run-cypress-tests
+        filters:
+          branches:
+            only:
+              - main   # Run this job only on the main branch
       - notify-failure:
           requires:
             - run-cypress-tests
           filters:
             branches:
               only:
-                - main # Specify the branch you want to monitor
+                - main  # notify on the main branch
