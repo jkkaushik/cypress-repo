@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/install-packages:
           cache-path: ~/project/node_modules
-          override-ci-command: npm install
+          override-ci-command: npm install --legacy-peer-deps
       - run:
           name: Install Cypress
           command: npm install cypress --save-dev
@@ -44,4 +44,4 @@ workflows:
           filters:
             branches:
               only:
-                - master # Specify the branch you want to monitor
+                - main # Specify the branch you want to monitor
