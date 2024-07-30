@@ -1,29 +1,54 @@
 version: 2.1
 orbs:
   node: circleci/node@5
+
 jobs:
-  run-cypress-testcases:
-    # Install node dependencies and run tests
+  run-cypress-tests:
     executor: node/default
     steps:
       - checkout
       - node/install-packages:
           cache-path: ~/project/node_modules
-          override-ci-command: npm install
+          override-ci-command: npm install --legacy-peer-deps
+      - run:
+          name: Install Xvfb
+          command: sudo apt-get update && sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
       - run:
           name: Install Cypress
-          command: npm install cypress
-      - run:
-          name: Install npm dependencies
-          command: npm install
+          command: npm install cypress --save-dev
       - run:
           name: Run Cypress Tests
           command: npm run test
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
+      - run:
+          name: Notify Google Chat on Success
+          command: |
+            curl -X POST -H "Content-Type: application/json" -d '{
+              "text": "Cypress tests passed successfully!"
+            }' https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk
+
+  notify-failure:
     docker:
       - image: cimg/base:stable
+    steps:
+      - run:
+          name: Notify Google Chat on Failure
+          command: |
+            curl -X POST -H "Content-Type: application/json" -d '{
+              "text": "Cypress tests failed!"
+            }' https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk
+
 workflows:
   build-and-test:
     jobs:
-      - run-cypress-testcases
+      - run-cypress-tests:
+          filters:
+            branches:
+              only:
+                - main   # Run this job only on the main branch
+      - notify-failure:
+          requires:
+            - run-cypress-tests
+          filters:
+            branches:
+              only:
+                - main  # notify on the main branch
