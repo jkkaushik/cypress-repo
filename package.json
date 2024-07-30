@@ -1,0 +1,22 @@
+{
+  "name": "cypresspoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run",
+    "smoke": "npx cypress run --env CYPRESS_INCLUDE_TAGS=smoke",
+    "sanity": "npx cypress run --env CYPRESS_INCLUDE_TAGS=sanity",
+    "regression": "npx cypress run --env CYPRESS_INCLUDE_TAGS=regression"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.13.1",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "cypress-select-tests": "^1.7.1",
+    "cypress-tags": "^1.2.2",
+    "mochawesome": "^7.1.3",
+    "typescript": "^5.5.4"
+  }
+}
