@@ -23,22 +23,13 @@ jobs:
 
       - run:
           name: List Reports Directory
-          command: ls -la cypress/reports/html/.jsons
-      # - run:
-      #     name: Execution Report
-      #     command: node index.js
+          command: ls -la cypress/reports/html/
       - store_artifacts:
           path: cypress/reports/html/index.html # Change to your report's path
           destination: cypress_report/index.html # Optional: Custom name for the artifact
       # - store_artifacts:
       #     path: cypress/reports/html/screenshots
       #     destination: cypress_report/screenshots # Store screenshots as well (optional)
-      - run:
-          name: Debug Environment Variables
-          command: |
-            echo "CIRCLE_PROJECT_USERNAME: ${CIRCLE_PROJECT_USERNAME}"
-            echo "CIRCLE_PROJECT_REPONAME: ${CIRCLE_PROJECT_REPONAME}"
-            echo "CIRCLE_BUILD_NUM: ${CIRCLE_BUILD_NUM}"
       - run:
           name: Execution Report
           command: node index.js
