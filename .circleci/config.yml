@@ -16,16 +16,20 @@ jobs:
       - run:
           name: Install Cypress
           command: npm install cypress --save-dev
-      # - run:
-      #     name: Install Node-fetch
-      #     command: npm install node-fetch --save
       - run:
           name: Run Cypress Tests
           command: |
             npm run test || echo "Cypress tests failed, continuing..."
       - run:
-          name: Send Report to Google Chat
+          name: Execution Report
           command: node index.js
+      - store_artifacts:
+          path: cypress/reports/html/index.html # Change to your report's path
+          destination: cypress_report/index.html # Optional: Custom name for the artifact
+      - store_artifacts:
+          path: cypress/screenshots
+          destination: cypress_report/screenshots # Store screenshots as well (optional)
+
 
 workflows:
   build-and-test:
