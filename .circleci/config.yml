@@ -20,15 +20,18 @@ jobs:
           name: Run Cypress Tests
           command: |
             npm run test || echo "Cypress tests failed, continuing..."
+      # - run:
+      #     name: Execution Report
+      #     command: node index.js
+      - store_artifacts:
+          path: home/circleci/project/cypress/reports/html/index.html # Change to your report's path
+          destination: cypress_report/index.html # Optional: Custom name for the artifact
+      - store_artifacts:
+          path: home/circleci/project/cypress/failures/screenshots
+          destination: cypress_report/screenshots # Store screenshots as well (optional)
       - run:
           name: Execution Report
           command: node index.js
-      - store_artifacts:
-          path: cypress/reports/html/index.html # Change to your report's path
-          destination: cypress_report/index.html # Optional: Custom name for the artifact
-      - store_artifacts:
-          path: cypress/screenshots
-          destination: cypress_report/screenshots # Store screenshots as well (optional)
 
 
 workflows:
