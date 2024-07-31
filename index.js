@@ -20,8 +20,19 @@ async function webhook(artifactUrl) {
 
 // Get the CircleCI build number and project slug from environment variables
 const buildNumber = process.env.CIRCLE_BUILD_NUM; // This is automatically set by CircleCI
+
+
+const projectUsername = process.env.CIRCLE_PROJECT_USERNAME;
+const projectReponame = process.env.CIRCLE_PROJECT_REPONAME;
+
+console.log('Build Number:', buildNumber);
+console.log('Project Username:', projectUsername);
+console.log('Project Reponame:', projectReponame);
+
+
 const projectSlug = `${process.env.CIRCLE_PROJECT_USERNAME}/${process.env.CIRCLE_PROJECT_REPONAME}`; // Construct the project slug
 const artifactUrl = `https://circleci.com/gh/${projectSlug}/${buildNumber}/artifacts/0/cypress_report/index.html`;
 
+console.log('Artifact URL:', artifactUrl);
 // Call the webhook function with the artifact URL
 webhook(artifactUrl).then(res => console.log(res));
