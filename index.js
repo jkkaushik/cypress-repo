@@ -1,3 +1,6 @@
+const fs = require('fs'); // Import the 'fs' module
+const fetch = require('node-fetch');
+
 /**
  * Sends asynchronous message to Google Chat with the Cypress HTML report.
  * @return {Object} response
