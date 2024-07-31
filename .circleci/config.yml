@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: List Reports Directory
-          command: ls -la
+          command: ls -la cypress/reports/html/
       # - run:
       #     name: Execution Report
       #     command: node index.js
@@ -34,14 +34,14 @@ jobs:
       #     path: cypress/reports/html/screenshots
       #     destination: cypress_report/screenshots # Store screenshots as well (optional)
       - run:
-          name: Execution Report
-          command: node index.js
-      - run:
           name: Debug Environment Variables
           command: |
             echo "CIRCLE_PROJECT_USERNAME: ${CIRCLE_PROJECT_USERNAME}"
             echo "CIRCLE_PROJECT_REPONAME: ${CIRCLE_PROJECT_REPONAME}"
             echo "CIRCLE_BUILD_NUM: ${CIRCLE_BUILD_NUM}"
+      - run:
+          name: Execution Report
+          command: node index.js
 
 workflows:
   build-and-test:
