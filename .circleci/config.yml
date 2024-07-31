@@ -20,11 +20,8 @@ jobs:
           name: Run Cypress Tests
           command: |
             npm run test || echo "Cypress tests failed, continuing..."
-      - run:
-          name: Wait for reporting
-          command: sleep 5
       - store_artifacts:
-          path: cypress/reports/html/index.html # Change to your report's path
+          path: /home/circleci/project/cypress/reports/html/index.html # Change to your report's path
           destination: cypress_report/index.html # Optional: Custom name for the artifact
       # - store_artifacts:
       #     path: cypress/reports/html/screenshots
