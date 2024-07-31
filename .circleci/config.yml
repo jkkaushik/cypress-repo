@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: List Reports Directory
-          command: ls -la cypress/reports/html/
+          command: ls -la cypress/reports/html/.jsons
       # - run:
       #     name: Execution Report
       #     command: node index.js
