@@ -7,6 +7,7 @@ jobs:
     executor: node/default
     environment:
       SEND_WEBHOOK: "true"
+      PROJECT_SPECIFIC_ENV: "my-cypress-project"
     steps:
       - checkout
       - node/install-packages:
@@ -22,6 +23,9 @@ jobs:
           name: Run Cypress Tests
           command: |
             npm run test || echo "Cypress tests failed, continuing..."
+      - run:
+          name: Verify Report Directory
+          command: ls -la /home/circleci/project/cypress/reports/html
       - store_artifacts:
           path: /home/circleci/project/cypress/reports/html
           destination: cypress_report

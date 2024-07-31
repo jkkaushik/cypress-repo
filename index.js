@@ -18,7 +18,7 @@ async function webhook(artifactUrl) {
   }
 }
 
-if (process.env.SEND_WEBHOOK === "true") {
+if (process.env.SEND_WEBHOOK === "true" && process.env.PROJECT_SPECIFIC_ENV === "my-cypress-project") {
 // Get the CircleCI build number and project slug from environment variables
 const buildNumber = process.env.CIRCLE_BUILD_NUM; // This is automatically set by CircleCI
 const projectSlug = `${process.env.CIRCLE_PROJECT_USERNAME}/${process.env.CIRCLE_PROJECT_REPONAME}`; // Construct the project slug
