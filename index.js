@@ -19,19 +19,31 @@ async function webhook(artifactUrl) {
 }
 
 // Get the CircleCI build number and project slug from environment variables
-const buildNumber = process.env.CIRCLE_BUILD_NUM; // This is automatically set by CircleCI
+// const buildNumber = process.env.CIRCLE_BUILD_NUM; // This is automatically set by CircleCI
 
 
-const projectUsername = process.env.CIRCLE_PROJECT_USERNAME;
-const projectReponame = process.env.CIRCLE_PROJECT_REPONAME;
+// const projectUsername = process.env.CIRCLE_PROJECT_USERNAME;
+// const projectReponame = process.env.CIRCLE_PROJECT_REPONAME;
 
-console.log('Build Number:', buildNumber);
-console.log('Project Username:', projectUsername);
-console.log('Project Reponame:', projectReponame);
+// console.log('Build Number:', buildNumber);
+// console.log('Project Username:', projectUsername);
+// console.log('Project Reponame:', projectReponame);
 
 
-const projectSlug = `${process.env.CIRCLE_PROJECT_USERNAME}/${process.env.CIRCLE_PROJECT_REPONAME}`; // Construct the project slug
-const artifactUrl = `https://circleci.com/gh/${projectSlug}/${buildNumber}/artifacts/0/cypress_report/index.html`;
+// const projectSlug = `${process.env.CIRCLE_PROJECT_USERNAME}/${process.env.CIRCLE_PROJECT_REPONAME}`; // Construct the project slug
+// const artifactUrl = `https://circleci.com/gh/${projectSlug}/${buildNumber}/artifacts/0/cypress_report/index.html`;
+
+// Get the CircleCI pipeline and job details from environment variables
+const pipelineId = process.env.CIRCLE_PIPELINE_ID;
+const workflowId = process.env.CIRCLE_WORKFLOW_ID;
+const jobId = process.env.CIRCLE_BUILD_NUM; // Job ID is typically the build number
+
+console.log('Pipeline ID:', pipelineId);
+console.log('Workflow ID:', workflowId);
+console.log('Job ID:', jobId);
+
+const artifactUrl = `https://app.circleci.com/pipelines/circleci/${pipelineId}/workflows/${workflowId}/jobs/${jobId}/artifacts/0/cypress_report/index.html`;
+
 
 console.log('Artifact URL:', artifactUrl);
 // Call the webhook function with the artifact URL
