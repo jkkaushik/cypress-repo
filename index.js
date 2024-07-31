@@ -1,5 +1,5 @@
-const fs = require('fs'); // Import the 'fs' module
-const fetch = require('node-fetch');
+import fs from 'fs'; // Import the 'fs' module
+import fetch from 'node-fetch';
 
 /**
  * Sends asynchronous message to Google Chat with the Cypress HTML report.
