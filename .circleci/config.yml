@@ -23,11 +23,8 @@ jobs:
           name: Run Cypress Tests
           command: |
             npm run test || echo "Cypress tests failed, continuing..."
-      - run:
-          name: Verify Report Directory
-          command: ls -la /home/circleci/project/cypress/reports/html
       - store_artifacts:
-          path: /home/circleci/project/cypress/reports/html
+          path: /home/circleci/project/cypress/reports/html/index.html
           destination: cypress_report
       - run:
           name: Execution Report
