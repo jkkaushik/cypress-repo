@@ -9,7 +9,7 @@
     "smoke": "npx cypress run --env CYPRESS_INCLUDE_TAGS=smoke",
     "sanity": "npx cypress run --env CYPRESS_INCLUDE_TAGS=sanity",
     "regression": "npx cypress run --env CYPRESS_INCLUDE_TAGS=regression",
-    "generate-report":"npx mochawesome-merge cypress/reports/html/.jsons/*.json > cypress/reports/html/report.json && npx mochawesome-report-generator cypress/reports/html/report.json"
+    "generate-report": "npx mochawesome-merge cypress/reports/html/.jsons/*.json > cypress/reports/html/report.json && npx mochawesome-report-generator cypress/reports/html/report.json"
   },
   "author": "",
   "license": "ISC",

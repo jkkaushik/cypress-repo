@@ -1,5 +1,4 @@
-// import fetch from 'node-fetch';
-import axios from 'axios';
+import fetch from 'node-fetch';
 
 const circleCiApiToken = process.env.CIRCLECI_API_TOKEN;
 const circleCiProjectSlug = `gh/${process.env.CIRCLE_PROJECT_USERNAME}/${process.env.CIRCLE_PROJECT_REPONAME}`;
@@ -16,6 +15,7 @@ async function getArtifactUrl() {
 
       const artifacts = response.data.items;
       if (artifacts.length > 0) {
+        console.log("url-> " + artifacts[0].url);
           return artifacts[0].url;  // Assuming you want the first artifact's URL
       } else {
           throw new Error('No artifacts found');
@@ -27,18 +27,13 @@ async function getArtifactUrl() {
 }
 
 async function sendToGoogleChat(artifactUrl) {
-
-  const message = {
-    text: `CircleCI build artifact is available at: ${artifactUrl}`
-};
-
-try {
-    const response = await axios.post(url, message);
-    console.log('Message sent successfully:', response.data);
-} catch (error) {
-    console.error('Error sending message to Google Chat:', error);
-}
-}
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {"Content-Type": "application/json; charset=UTF-8"},
+      body: JSON.stringify({text: "CircleCI build artifact is available at:" + artifactUrl})
+    });
+    return await res.json();
+  }
 
 
 (async () => {
