@@ -1,6 +1,7 @@
 const cypress = require("cypress")
 const { defineConfig } = require("cypress");
 const { tagify } = require('cypress-tags');
+require('cypress-mochawesome-reporter/plugin');
 
 module.exports = defineConfig({
     reporter: 'cypress-mochawesome-reporter',
