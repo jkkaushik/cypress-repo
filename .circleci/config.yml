@@ -21,10 +21,7 @@ jobs:
           command: npm run test
       - run:
           name: Send Report to Google Chat
-          command: |
-            REPORT_CONTENT=$(< cypress/reports/html/index.html)  # Load report content into variable
-            PAYLOAD=$(jq -n --arg text "$REPORT_CONTENT" '{"text": $text}')  # Create JSON payload
-            curl -X POST -H 'Content-Type: application/json' -d "$PAYLOAD" https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk
+          command: node index.js
 workflows:
   build-and-test:
     jobs:
