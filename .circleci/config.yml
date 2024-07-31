@@ -24,6 +24,12 @@ jobs:
       - run:
           name: List Reports Directory
           command: ls -la cypress/reports/html/
+      - run:
+          name: Debug Environment Variables
+          command: |
+            echo "jatin_kaushik: ${CIRCLE_PROJECT_USERNAME}"
+            echo "circleci: ${CIRCLE_PROJECT_REPONAME}"
+
       - store_artifacts:
           path: cypress/reports/html/index.html # Change to your report's path
           destination: cypress_report/index.html # Optional: Custom name for the artifact
