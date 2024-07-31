@@ -20,23 +20,11 @@ jobs:
           name: Run Cypress Tests
           command: npm run test
       - run:
-          name: Notify Google Chat on Success
+          name: Send Report to Google Chat
           command: |
-            curl -X POST -H "Content-Type: application/json" -d '{
-              "text": "Cypress tests passed successfully!"
-            }' https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk
-
-  notify-failure:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - run:
-          name: Notify Google Chat on Failure
-          command: |
-            curl -X POST -H "Content-Type: application/json" -d '{
-              "text": "Cypress tests failed!"
-            }' https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk
-
+            REPORT_CONTENT=$(< cypress/reports/index.html)  # Load report content into variable
+            PAYLOAD=$(jq -n --arg text "$REPORT_CONTENT" '{"text": $text}')  # Create JSON payload
+            curl -X POST -H 'Content-Type: application/json' -d "$PAYLOAD" https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk
 workflows:
   build-and-test:
     jobs:
@@ -44,11 +32,4 @@ workflows:
           filters:
             branches:
               only:
-                - main   # Run this job only on the main branch
-      - notify-failure:
-          requires:
-            - run-cypress-tests
-          filters:
-            branches:
-              only:
-                - main  # notify on the main branch
+                - develop-circleci   # Run this job only on the main branch
