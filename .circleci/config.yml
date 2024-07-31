@@ -22,7 +22,7 @@ jobs:
             npm run test || echo "Cypress tests failed, continuing..."
       - store_artifacts:
           path: /home/circleci/project/cypress/reports/html/index.html # Change to your report's path
-          destination: cypress_report/index.html # Optional: Custom name for the artifact
+          destination: /home/circleci/project/cypress/reports/html/index.html # Optional: Custom name for the artifact
       # - store_artifacts:
       #     path: cypress/reports/html/screenshots
       #     destination: cypress_report/screenshots # Store screenshots as well (optional)
