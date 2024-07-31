@@ -17,6 +17,9 @@ jobs:
           name: Install Cypress
           command: npm install cypress --save-dev
       - run:
+          name: Install Node-fetch
+          command: npm install node-fetch --save
+      - run:
           name: Run Cypress Tests
           command: |
             npm run test || echo "Cypress tests failed, continuing..."
