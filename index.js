@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import axios from 'axios';
 
 const circleCiApiToken = process.env.CIRCLECI_API_TOKEN;
 const circleCiProjectSlug = `gh/${process.env.CIRCLE_PROJECT_USERNAME}/${process.env.CIRCLE_PROJECT_REPONAME}`;

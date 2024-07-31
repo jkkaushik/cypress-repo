@@ -7,6 +7,9 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      # - run:
+      #     name: Install Dependencies
+      #     command: npm install
       - node/install-packages:
           cache-path: ~/project/node_modules
           override-ci-command: npm install --legacy-peer-deps
