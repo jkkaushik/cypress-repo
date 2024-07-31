@@ -36,6 +36,12 @@ jobs:
       - run:
           name: Execution Report
           command: node index.js
+      - run:
+          name: Debug Environment Variables
+          command: |
+            echo "CIRCLE_PROJECT_USERNAME: ${CIRCLE_PROJECT_USERNAME}"
+            echo "CIRCLE_PROJECT_REPONAME: ${CIRCLE_PROJECT_REPONAME}"
+            echo "CIRCLE_BUILD_NUM: ${CIRCLE_BUILD_NUM}"
 
 workflows:
   build-and-test:
@@ -44,4 +50,4 @@ workflows:
           filters:
             branches:
               only:
-                - develop-circleci   # Run this job only on the develop-circleci branch
+                - main   # Run this job only on the develop-circleci branch
