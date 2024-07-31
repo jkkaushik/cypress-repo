@@ -5,6 +5,8 @@ orbs:
 jobs:
   run-cypress-tests:
     executor: node/default
+    environment:
+      SEND_WEBHOOK: "true"
     steps:
       - checkout
       - node/install-packages:
@@ -21,11 +23,8 @@ jobs:
           command: |
             npm run test || echo "Cypress tests failed, continuing..."
       - store_artifacts:
-          path: /home/circleci/project/cypress/reports/html/index.html # Change to your report's path
-          destination: /home/circleci/project/cypress/reports/html/index.html # Optional: Custom name for the artifact
-      # - store_artifacts:
-      #     path: cypress/reports/html/screenshots
-      #     destination: cypress_report/screenshots # Store screenshots as well (optional)
+          path: /home/circleci/project/cypress/reports/html
+          destination: cypress_report
       - run:
           name: Execution Report
           command: node index.js
