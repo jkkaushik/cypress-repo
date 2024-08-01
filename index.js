@@ -1,60 +1,57 @@
 import fetch from 'node-fetch';
-// import axios from 'axios';
 
-// const circleCiApiToken = process.env.CIRCLECI_API_TOKEN;
-// const circleCiProjectSlug = `gh/${process.env.CIRCLE_PROJECT_USERNAME}/${process.env.CIRCLE_PROJECT_REPONAME}`;
-// const circleCiBuildNumber = process.env.CIRCLE_BUILD_NUM;
-// const url = "https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk"; 
+const circleCiToken = process.env.CIRCLECI_TOKEN;
+const vcsType = 'github'; // Change to your VCS type (e.g., 'github', 'bitbucket')
+const username = 'jkkaushik'; // Replace with your GitHub username
+const project = 'circleci'; // Replace with your project name (repository)
+const buildNum = process.env.CIRCLE_BUILD_NUM;
 
-// async function getArtifactUrl() {
-//   try {
-//       const response = await axios.get(`https://circleci.com/api/v2/project/${circleCiProjectSlug}/${circleCiBuildNumber}/artifacts`, {
-//           headers: {
-//               'Circle-Token': circleCiApiToken
-//           }
-//       });
+async function getArtifactUrls() {
+    try {
+        // Fetch artifacts for the specified build
+        const response = await fetch(`https://circleci.com/api/v2/project/${vcsType}/${username}/${project}/build/${buildNum}/artifacts`, {
+            method: 'GET',
+            headers: {
+                'Circle-Token': circleCiToken,
+                'Accept': 'application/json',
+            },
+        });
 
-//       const artifacts = response.data.items;
-//       if (artifacts.length > 0) {
-//         console.log("url-> " + artifacts[0].url);
-//           return artifacts[0].url;  // Assuming you want the first artifact's URL
-//       } else {
-//           throw new Error('No artifacts found');
-//       }
-//   } catch (error) {
-//       console.error('Error fetching artifacts:', error);
-//       throw error;
-//   }
-// }
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
 
-// async function sendToGoogleChat(artifactUrl) {
-//     const res = await fetch(url, {
-//       method: "POST",
-//       headers: {"Content-Type": "application/json; charset=UTF-8"},
-//       body: JSON.stringify({text: "CircleCI build artifact is available at:" + artifactUrl})
-//     });
-//     return await res.json();
-//   }
+        const data = await response.json();
 
+        // Log the artifact URLs
+        console.log('Artifact URLs:');
+        data.items.forEach(artifact => {
+            console.log(artifact.url);
+        });
+    } catch (error) {
+        console.error('Failed to fetch artifact URLs:', error);
+    }
+};
 
-// (async () => {
-//   try {
-//       const artifactUrl = await getArtifactUrl();
-//       await sendToGoogleChat(artifactUrl);
-//   } catch (error) {
-//       console.error('Error:', error);
-//   }
-// })();
-
-async function webhook() {
-  // const reportPath = 'cypress/reports/html/index.html';
-    const url = "https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk"
+async function sendToGoogleChat(artifactUrl) {
+    // const url = "https://chat.googleapis.com/v1/spaces/AAAA8mmXBAg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=SWdadv404w_RiJ1fdvBYN1NyaIUmj-NjtpLpIdFj5vk"
+    const url = process.env.GCHAT_WEBHOOK_URL;
+    const message = {
+      text: `Build Successful!! Get the report from the artifacts: ${artifactUrl}`
+    };
     const res = await fetch(url, {
       method: "POST",
       headers: {"Content-Type": "application/json; charset=UTF-8"},
-      body: JSON.stringify({text: "Hello, get Eexecution Report from CircleCI artifacts!"})
+      body: JSON.stringify(message)
     });
     return await res.json();
   }
-  
-  webhook().then(res => console.log(res));
+
+  (async () => {
+      try {
+          const artifactUrl = await getArtifactUrls();
+          await sendToGoogleChat(artifactUrl);
+      } catch (error) {
+          console.error('Error:', error);
+      }
+    })();

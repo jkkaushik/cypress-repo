@@ -26,6 +26,9 @@ jobs:
       - store_artifacts:
           path: /home/circleci/project/cypress/reports/html
           destination: cypress_report
+      env:
+        CIRCLECI_TOKEN: ${{ secrets.CIRCLECI_TOKEN }}
+        GCHAT_WEBHOOK_URL: ${{ secrets.GCHAT_WEBHOOK_URL }}
       - run:
           name: Execution Report
           command: node index.js
