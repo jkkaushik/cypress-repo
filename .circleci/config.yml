@@ -27,10 +27,7 @@ jobs:
       - run:
           name: Execution Report
           command: node index.js
-          env:
-            CIRCLECI_TOKEN: $CIRCLECI_TOKEN
-            GCHAT_WEBHOOK_URL: $GCHAT_WEBHOOK_URL
-
+          
 workflows:
   build-and-test:
     jobs:
