@@ -1,13 +1,15 @@
 {
   "name": "cypresspoc",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run",
     "smoke": "npx cypress run --env CYPRESS_INCLUDE_TAGS=smoke",
     "sanity": "npx cypress run --env CYPRESS_INCLUDE_TAGS=sanity",
-    "regression": "npx cypress run --env CYPRESS_INCLUDE_TAGS=regression"
+    "regression": "npx cypress run --env CYPRESS_INCLUDE_TAGS=regression",
+    "generate-report": "npx mochawesome-merge cypress/reports/html/.jsons/*.json > cypress/reports/html/report.json && npx mochawesome-report-generator cypress/reports/html/report.json"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +18,7 @@
     "cypress-mochawesome-reporter": "^3.8.2",
     "cypress-tags": "^1.2.2",
     "mochawesome": "^7.1.3",
+    "node-fetch": "^3.3.2",
     "typescript": "^5.5.4"
   }
 }
