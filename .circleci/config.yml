@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Execution Report
           command: node index.js
-          
+
 workflows:
   build-and-test:
     jobs:
@@ -35,4 +35,4 @@ workflows:
           filters:
             branches:
               only:
-                - develop-circleci   # Run this job only on the develop-circleci branch
+                - main   # Run this job only on the develop-circleci branch
