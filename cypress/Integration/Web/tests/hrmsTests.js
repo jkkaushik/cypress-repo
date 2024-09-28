@@ -10,7 +10,7 @@ describe('Hrms MetaData and Add Employee', ()=>{
     let year = '';
     const hrmsPage = new HrmsPage();
 
-    it('create Employee Type', ()=>{
+    it(['regression'],'create Employee Type', ()=>{
         cy.hrmsLogin();
         cy.pause();
         hrmsPage.waitForSpinnerToDisappear();
@@ -32,7 +32,7 @@ describe('Hrms MetaData and Add Employee', ()=>{
         hrmsPage.verifyToastMessage('Added successfully');
     });
 
-    it('create Department', ()=>{
+    it(['sanity', 'regression'],'create Department', ()=>{
         cy.hrmsLogin();
         hrmsPage.waitForSpinnerToDisappear();
         hrmsPage.clickSetupBtn();
@@ -53,7 +53,7 @@ describe('Hrms MetaData and Add Employee', ()=>{
         hrmsPage.verifyToastMessage('Added successfully');
     });
 
-    it('create employee', ()=>{
+    it(['regression'],'create employee', ()=>{
         cy.fixture('metaData').then((data)=>{
             cy.hrmsLogin();
             hrmsPage.waitForSpinnerToDisappear();

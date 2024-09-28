@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Run Cypress Tests
           command: |
-            npm run test || echo "Cypress tests failed, continuing..."
+            npm run smoke || echo "Cypress tests failed, continuing..."
       - store_artifacts:
           path: /home/circleci/project/cypress/reports/html
           destination: cypress_report

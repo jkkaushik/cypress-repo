@@ -20,7 +20,7 @@ describe('POS Tests',function(){
     })
 
 
-    it('pos tests', function(){
+    it(['sanity', 'regression'],'pos tests', function(){
         cy.login();
         homePage.clickPosThumbnail();
         commonPage.clickSideMenuRotateSpan();
@@ -57,7 +57,7 @@ describe('POS Tests',function(){
     });
 
 
-    it('Create Modifier and verify "create" button is disabled if input fields are not filled', function(){
+    it(['regression'],'Create Modifier and verify "create" button is disabled if input fields are not filled', function(){
         cy.login();
         homePage.clickPosThumbnail();
         commonPage.clickSideMenuRotateSpan();

@@ -39,14 +39,14 @@ describe('Order Entry Tests', ()=>{
 
     })
 
-    it('search item',function(){
+    it(['sanity'],'search item',function(){
         orderEntryPage.waitForItemsToLoad();
         orderEntryPage.enterItemNameToSearch(this.orderEntryData.searchItem);
         cy.pause();
         orderEntryPage.getItemsList(this.orderEntryData.searchItem);
     });
 
-    it('change currency', function(){
+    it(['smoke', 'sanity'],'change currency', function(){
         orderEntryPage.waitForItemsToLoad();
         orderEntryPage.clickCurrencyAndOtherOutletEllipsis();
         orderEntryPage.clickChangeCurrencyBtn();
@@ -55,7 +55,7 @@ describe('Order Entry Tests', ()=>{
         orderEntryPage.verifyCurrentCurrency(this.orderEntryData.newCurrency);
     });
 
-    it('save kot', function(){
+    it(['sanity', 'regression'],'save kot', function(){
         cy.fixture('orderEntry').then((data)=>{
             orderEntryPage.waitForItemsToLoad();
             orderEntryPage.clickTableButton();
@@ -79,7 +79,7 @@ describe('Order Entry Tests', ()=>{
         });
     });
 
-    it('open table without name', ()=>{
+    it(['sanity'],'open table without name', ()=>{
         orderEntryPage.waitForItemsToLoad();
         orderEntryPage.clickTableButton();
         orderEntryPage.clickOpenTableButton();
@@ -91,7 +91,7 @@ describe('Order Entry Tests', ()=>{
         orderEntryPage.verifyToastMessage('Table Name & Covers Capacity are required');
     });
 
-    it('settle bill', function(){
+    it(['sanity', 'regression'],'settle bill', function(){
         cy.fixture('orderEntry').then((data)=>{
             orderEntryPage.waitForItemsToLoad();
             orderEntryPage.clickTableButton();
@@ -109,7 +109,7 @@ describe('Order Entry Tests', ()=>{
         });
     });
 
-    it('open table', ()=>{
+    it(['regression'],'open table', ()=>{
         orderEntryPage.waitForItemsToLoad();
         orderEntryPage.clickTableButton();
         orderEntryPage.clickOpenTableButton();
@@ -123,7 +123,7 @@ describe('Order Entry Tests', ()=>{
         orderEntryPage.verifyToastMessage('Open table created successfully.');
     }); 
 
-    it('select table without server', ()=>{
+    it(['sanity', 'regression'],'select table without server', ()=>{
         cy.fixture('orderEntry').then((data)=>{
             orderEntryPage.waitForItemsToLoad();
             orderEntryPage.clickTableButton();

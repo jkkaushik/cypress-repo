@@ -17,7 +17,7 @@ describe('Fx Reservation',()=>{
     //     cy.fixture('homepage').as('homePageData');
     // });
 
-    it('create guest profile', async function(){
+    it(['smoke', 'sanity', 'regression'],'create guest profile', async function(){
         cy.login();
         homePage.clickFxReservationThumbnail();
         fxReservationPage.clickCreateGuestEllipses();
@@ -42,7 +42,7 @@ describe('Fx Reservation',()=>{
         commonPage.verifyToastMessage('Guest Profile Created');
     });
 
-    it('create travel agent', function(){
+    it(['smoke'],'create travel agent', function(){
         cy.login();
         homePage.clickFxReservationThumbnail();
         fxReservationPage.clickTravelAgentEllipses();
@@ -67,7 +67,7 @@ describe('Fx Reservation',()=>{
         commonPage.verifyToastMessage('TravelAgent created successfully');
     });
 
-    it('create company', function(){
+    it(['regression'],'create company', function(){
         cy.login();
         homePage.clickFxReservationThumbnail();
         fxReservationPage.clickCompanyEllipses();

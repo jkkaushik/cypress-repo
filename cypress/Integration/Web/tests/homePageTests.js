@@ -10,14 +10,14 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 describe('Home Page Tests',function(){
     const homePage = new HomePage();
 
-    it('Log out', function(){
+    it(['smoke'],'Log out', function(){
         cy.login();
         homePage.clickUserProfileIcon();
         homePage.clickLogoutBtn();
         homePage.getLoginPageHeader().should('contain', ' Login to manage');
     });
 
-    it('verify menu items', function(){
+    it(['smoke'],'verify menu items', function(){
         cy.fixture('homePage').then((data)=>{
             cy.login();
             homePage.getMenuItems(data.menuItems);
