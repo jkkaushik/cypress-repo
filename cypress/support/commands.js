@@ -13,32 +13,32 @@ Cypress.Commands.add('checkSoftAssertions', () => {
     });
   });
 
-  import CommonPage from "../Integration/Web/pages/commonPage";
-  import HrmsPage from "../Integration/Web/pages/hrmsPage";
+//   import CommonPage from "../Integration/Web/pages/commonPage";
+//   import HrmsPage from "../Integration/Web/pages/hrmsPage";
 
-const commanPage = new CommonPage();
-const hrms = new HrmsPage();
+// const commanPage = new CommonPage();
+// const hrms = new HrmsPage();
 
-Cypress.Commands.add('login', () => {
-    cy.visit(Cypress.env('url'));
-   cy.fixture('login.json').then((users)=>{
-    commanPage.loginWithConfigurtion(users.email, users.password);
-   })
-})
+// Cypress.Commands.add('login', () => {
+//     cy.visit(Cypress.env('url'));
+//    cy.fixture('login.json').then((users)=>{
+//     commanPage.loginWithConfigurtion(users.email, users.password);
+//    })
+// })
 
-Cypress.Commands.add('posLogin', () => {
-    cy.visit(Cypress.env('posUrl'));
-    cy.fixture('login.json').then((users)=>{
-        commanPage.loginWithOperational(users.email, users.password);   
-    })
-})
+// Cypress.Commands.add('posLogin', () => {
+//     cy.visit(Cypress.env('posUrl'));
+//     cy.fixture('login.json').then((users)=>{
+//         commanPage.loginWithOperational(users.email, users.password);   
+//     })
+// })
 
-Cypress.Commands.add('hrmsLogin', () => {
-    cy.visit(Cypress.env('hrmsUrl'));
-    cy.fixture('login.json').then((users)=>{
-        hrms.login(users.hrmsEmail, users.hrmsPassword);   
-    })
-})
+// Cypress.Commands.add('hrmsLogin', () => {
+//     cy.visit(Cypress.env('hrmsUrl'));
+//     cy.fixture('login.json').then((users)=>{
+//         hrms.login(users.hrmsEmail, users.hrmsPassword);   
+//     })
+// })
 
 Cypress.Commands.add('randomString', (length)=>{
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

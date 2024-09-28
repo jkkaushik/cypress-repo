@@ -11,7 +11,7 @@ describe('My Test Suite', function()
         });
       });
  
-    it('My FirstTest case',function() {
+    it(['smoke'], 'My FirstTest case',function() {
     
     //Check boxes
     cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
