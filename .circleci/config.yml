@@ -35,4 +35,4 @@ workflows:
           filters:
             branches:
               only:
-                - main   # Run this job only on the develop-circleci branch
+                - develop-circleci   # Run this job only on the develop-circleci branch
