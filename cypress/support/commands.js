@@ -14,10 +14,10 @@ Cypress.Commands.add('checkSoftAssertions', () => {
   });
 
   import CommonPage from "../Integration/Web/pages/commonPage";
-  import Hrms from "../integration/pages/hrmsPage";
+  import HrmsPage from "../Integration/Web/pages/hrmsPage";
 
 const commanPage = new CommonPage();
-const hrms = new Hrms();
+const hrms = new HrmsPage();
 
 Cypress.Commands.add('login', () => {
     cy.visit(Cypress.env('url'));
