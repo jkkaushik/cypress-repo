@@ -13,19 +13,11 @@ module.exports = defineConfig({
       on("file:preprocessor", tagify(config));
       // implement node event listeners here
     },
+    video: true,
     specPattern: ["cypress/Integration/API/*.spec.js", "cypress/Integration/Web/tests/*.js"],
     // specPattern: "cypress/Integration/API/*.spec.js",
-    screenshotOnRunFailure: true,
-    screenshotsFolder: "cypress/failures/screenshots",
   },
-  reporter: "cypress-mochawesome-reporter",
   env: {
-    mochawesomeReporterOptions: {
-      reportDir: path.join(__dirname, "cypress/reports/html/.jsons"), // Specify report output directory
-      overwrite: false,
-      html: true,
-      json: true,
-    },
     CYPRESS_INCLUDE_TAGS: "smoke,sanity,regression",
     base_url: "https://simple-books-api.glitch.me",
     authEndPoint: "/api-clients",
