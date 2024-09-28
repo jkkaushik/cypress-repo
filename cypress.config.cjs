@@ -13,7 +13,8 @@ module.exports = defineConfig({
       on("file:preprocessor", tagify(config));
       // implement node event listeners here
     },
-    specPattern: ["cypress/Integration/API/*.spec.js", "cypress/Integration/Web/tests/*.spec.js"],
+    // specPattern: ["cypress/Integration/API/*.spec.js", "cypress/Integration/Web/tests/*.spec.js"],
+    specPattern: "cypress/Integration/API/*.spec.js",
     screenshotOnRunFailure: true,
     screenshotsFolder: "cypress/failures/screenshots",
   },

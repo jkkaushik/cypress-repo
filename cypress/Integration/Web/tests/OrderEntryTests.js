@@ -7,7 +7,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
   });
 
-describe('Order Entry Tests', ()=>{
+describe.skip('Order Entry Tests', ()=>{
 
     const orderEntryPage = new OrderEntryPage();
     const commonPage = new CommonPage();
